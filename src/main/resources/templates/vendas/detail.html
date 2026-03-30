@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Venda</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Detalhes da Venda</h1>
+<fieldset>
+    <legend>Itens</legend>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tr th:each="item : ${venda.itensVenda}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.produto.descricao}"></td>
+            <td th:text="${item.quantidade}"></td>
+            <td th:text="'R$ '+${item.produto.preco}"></td>
+            <td th:text="'R$ '+${item.total()}"></td>
+        </tr>
+    </table>
+    <p>Data: <span th:text="${venda.data}"></span></p>
+    <p>Total: <span th:text="'R$ '+${venda.total()}"></span></p>
+</fieldset>
+</body>
+</html>
