@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-<head xmlns:th="http://www.thymeleaf.org">
-    <meta charset="UTF-8">
-    <title>Lista de Vendas</title>
 
-    <link rel="stylesheet" href="/style.css">
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title},~{})}">
+
+    <title>Lista de vendas</title>
 </head>
 <body>
-<h1>Lista de Vendas</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Clente</th>
-        <th>Data</th>
-        <th>Total</th>
-        <th>Detalhes</th>
-    </tr>
-    </thead>
-    <tr th:each="venda : ${vendas}">
-        <td th:text="${venda.id}"></td>
-        <td th:text="${venda.pessoa.nome()}"></td>
-        <td th:text="${venda.data}"></td>
-        <td th:text="'R$ '+${venda.total()}"></td>
-        <td><a th:href="@{/vendas/detalhes/{id}(id = ${venda.id})}">detalhes</a></td>
-    </tr>
-</table>
+<main>
+    <h1>Lista de Vendas</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Clente</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Detalhes</th>
+        </tr>
+        </thead>
+        <tr th:each="venda : ${vendas}">
+            <td th:text="${venda.id}"></td>
+            <td th:text="${venda.pessoa.nome()}"></td>
+            <td th:text="${venda.data}"></td>
+            <td th:text="'R$ '+${venda.total()}"></td>
+            <td><a th:href="@{/vendas/detalhes/{id}(id = ${venda.id})}">detalhes</a></td>
+        </tr>
+    </table>
+</main>
 </body>
 </html>

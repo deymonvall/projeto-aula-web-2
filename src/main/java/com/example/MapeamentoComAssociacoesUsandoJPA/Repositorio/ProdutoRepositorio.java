@@ -17,8 +17,9 @@ public class ProdutoRepositorio {
         em.persist(produto);
     }
 
-    public void excluir(long id) {
+    public void excluir(int id) {
         Produto produto = em.find(Produto.class, id);
+        em.remove(produto);
     }
 
     public Produto buscar(long id) {
@@ -26,7 +27,7 @@ public class ProdutoRepositorio {
     }
 
     public List<Produto> buscarTodos() {
-        return em.createQuery("select v from Venda v", Produto.class).getResultList();
+        return em.createQuery("select p from Produto p", Produto.class).getResultList();
     }
 
     public void atualizar(Produto produto) {

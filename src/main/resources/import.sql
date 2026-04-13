@@ -2,6 +2,7 @@
 INSERT INTO produto (id, preco, descricao)VALUES (1, 20, 'lapis');
 
 INSERT INTO produto (id, preco, descricao)VALUES (2, 25, 'caderno');
+INSERT INTO produto (id, preco, descricao)VALUES (3, 30, 'livro');
 
 INSERT into  pessoa (id, email, telefone) VALUES (1,'@aaaaaaaaaa','11111111111');
 INSERT into  pessoa (id, email, telefone) VALUES (2,'@bbbbbbbbbb','22222222222');

@@ -4,6 +4,7 @@ import com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.Item;
 import com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.Produto;
 import com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.Venda;
 import com.example.MapeamentoComAssociacoesUsandoJPA.Repositorio.VendaRepositorio;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@Transactional
 @Controller
 @RequestMapping("/vendas")
 public class VendaControle {
     @Autowired
     VendaRepositorio vendaRepositorio;
 
-    @GetMapping("/lista")
+    @GetMapping("")
     public ModelAndView lista(Model model) {
         model.addAttribute("vendas", vendaRepositorio.buscarTodos());
         return new ModelAndView("vendas/list");

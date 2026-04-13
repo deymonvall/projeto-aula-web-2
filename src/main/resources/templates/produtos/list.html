@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title},~{})}">
+
+    <title>Lista de produtos</title>
+</head>
+<body>
+<main>
+    <h1>Lista de Produtos</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+        </thead>
+        <tr th:each="p : ${produtos}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.descricao}"></td>
+            <td th:text="${p.preco}"></td>
+            <td><a th:href="@{/produtos/editar/{id}(id=${p.id})}">Editar</a></td>
+            <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                   th:href="@{/produtos/remover/{id}(id=${p.id})}">Excluir</a></td>
+        </tr>
+    </table>
+</main>
+
+</body>
+</html>

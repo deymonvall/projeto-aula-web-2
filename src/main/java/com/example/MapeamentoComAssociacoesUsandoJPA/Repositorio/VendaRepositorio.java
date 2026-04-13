@@ -29,7 +29,6 @@ public class VendaRepositorio {
     }
 
     public List<Venda> buscarTodos() {
-
         return em.createQuery("select v from Venda v", Venda.class).getResultList();
     }
 }

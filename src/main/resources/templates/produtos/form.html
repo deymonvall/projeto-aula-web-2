@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title},~{})}">
+
+    <title>Produto</title>
+</head>
+<body>
+<main>
+    <h1>Produto</h1>
+    <form class="formulario" th:action="@{/produtos/salvar}"
+          th:object="${produto}"
+          method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{descricao}" placeholder="Descricao">
+        <input type="number" th:field="*{preco}" placeholder="Valor">
+        <input type="submit" value="Salvar">
+    </form>
+</main>
+</body>
+</html>
