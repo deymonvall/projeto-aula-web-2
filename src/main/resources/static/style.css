@@ -32,6 +32,7 @@ h1 {
 
 /* inputs */
 .formulario input[type="text"],
+.formulario input[type="date"],
 .formulario input[type="number"] {
     width: 100%;
     padding: 10px;

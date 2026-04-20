@@ -51,4 +51,8 @@ public abstract class Pessoa {
     }
 
     public abstract String nome();
+    public String getTipo() {
+        if (this instanceof PessoaFisica) return "Física";
+        return "Jurídica";
+    }
 }

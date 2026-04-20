@@ -33,4 +33,10 @@ public class ProdutoRepositorio {
     public void atualizar(Produto produto) {
         em.merge(produto);
     }
+
+    public List<Produto> buscarPorNome(String nome) {
+        return em.createQuery("select p from Produto p where p.descricao like :nome", Produto.class)
+                .setParameter("nome", "%" + nome + "%")
+                .getResultList();
+    }
 }

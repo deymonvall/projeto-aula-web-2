@@ -9,6 +9,12 @@
 <body>
 <main>
     <h1>Lista de Vendas</h1>
+    <form class="formulario" action="#" th:action="@{/vendas/filtrar}" method="POST">
+        <label for="data">Selecione a data:</label>
+        <input type="hidden" th:if="${clienteId != null}" name="clienteId" th:value="${clienteId}">
+        <input type="date" id="data" name="data">
+        <input type="submit" value="Filtrar">
+    </form>
     <table border="1">
         <thead>
         <tr>
@@ -21,7 +27,8 @@
         </thead>
         <tr th:each="venda : ${vendas}">
             <td th:text="${venda.id}"></td>
-            <td th:text="${venda.pessoa.nome()}"></td>
+            <td><a th:href="@{/vendas/cliente/{id}(id = ${venda.pessoa.id})} "
+                   th:text="${venda.pessoa.nome()}">Consultar cliente</a></td>
             <td th:text="${venda.data}"></td>
             <td th:text="'R$ '+${venda.total()}"></td>
             <td><a th:href="@{/vendas/detalhes/{id}(id = ${venda.id})}">detalhes</a></td>

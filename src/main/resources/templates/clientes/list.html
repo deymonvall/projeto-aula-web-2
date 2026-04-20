@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title},~{})}">
+
+    <title>Lista de clientes</title>
+</head>
+<body>
+<main>
+    <h1>Lista de Clientes</h1>
+    <form class="formulario" action="#" th:action="@{/clientes/filtrar}" method="POST">
+        <label for="nome">Digite o nome:</label>
+        <input type="text" id="nome" name="nome">
+        <input type="submit" value="Filtrar">
+    </form>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tipo</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>CPF/CNPJ</th>
+            <th>Vendas</th>
+        </tr>
+        </thead>
+        <tr   th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}"></td>
+            <td th:text="${cliente.tipo}"></td>
+            <td th:text="${cliente.nome()}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td th:text="${cliente instanceof T(com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.PessoaFisica)} ? ${cliente.cpf} : ${cliente.cnpj}"></td>
+            <td><a th:href="@{/vendas/cliente/{id}(id = ${cliente.id})}">Consultar</a></td>
+
+        </tr>
+    </table>
+</main>
+</body>
+</html>

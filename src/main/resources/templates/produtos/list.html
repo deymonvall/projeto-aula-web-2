@@ -9,6 +9,12 @@
 <body>
 <main>
     <h1>Lista de Produtos</h1>
+    <form class="formulario" action="#" th:action="@{/produtos/filtrar}" method="POST">
+        <label for="nome">Digite o nome:</label>
+        <input type="text" id="nome" name="nome">
+        <input type="submit" value="Filtrar">
+    </form>
+
     <table border="1">
         <thead>
         <tr>

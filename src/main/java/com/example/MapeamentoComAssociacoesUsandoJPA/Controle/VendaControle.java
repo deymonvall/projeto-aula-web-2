@@ -1,19 +1,15 @@
 package com.example.MapeamentoComAssociacoesUsandoJPA.Controle;
 
-import com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.Item;
-import com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.Produto;
 import com.example.MapeamentoComAssociacoesUsandoJPA.Modelo.Entity.Venda;
 import com.example.MapeamentoComAssociacoesUsandoJPA.Repositorio.VendaRepositorio;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Transactional
 @Controller
@@ -33,5 +29,29 @@ public class VendaControle {
         Venda venda = vendaRepositorio.buscarPorId(id);
         model.addAttribute("venda", venda);
         return new ModelAndView("vendas/detail");
+    }
+
+    @PostMapping("/filtrar")
+    public ModelAndView filtrar(Model model, @RequestParam(value = "data", required = false) LocalDate data,
+                                @RequestParam(required = false) Integer clienteId) {
+        if (data == null) {
+            return (clienteId != null)
+                    ? new ModelAndView("redirect:/vendas/cliente/" + clienteId)
+                    : new ModelAndView("redirect:/vendas");
+        }
+        if(clienteId != null) {
+            model.addAttribute("clienteId", clienteId);
+            model.addAttribute("vendas", vendaRepositorio.buscarPorData(data, clienteId));
+        }
+        else
+            model.addAttribute("vendas", vendaRepositorio.buscarPorData(data));
+
+        return new ModelAndView("vendas/list");
+    }
+    @GetMapping("cliente/{id}")
+    public ModelAndView vendasPorCliente(@PathVariable int id, Model model) {
+        model.addAttribute("clienteId", id);
+        model.addAttribute("vendas", vendaRepositorio.buscarPorCliente(id));
+        return new ModelAndView("vendas/list");
     }
 }
